@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/reactform/static/css/main.a1c5849e.chunk.css",
+    "main.js": "/reactform/static/js/main.47d5577c.chunk.js",
+    "main.js.map": "/reactform/static/js/main.47d5577c.chunk.js.map",
+    "runtime-main.js": "/reactform/static/js/runtime-main.a0250ab4.js",
+    "runtime-main.js.map": "/reactform/static/js/runtime-main.a0250ab4.js.map",
+    "static/js/2.37623dad.chunk.js": "/reactform/static/js/2.37623dad.chunk.js",
+    "static/js/2.37623dad.chunk.js.map": "/reactform/static/js/2.37623dad.chunk.js.map",
+    "index.html": "/reactform/index.html",
+    "precache-manifest.9ac08370b4565d33f2b80fe5675caac8.js": "/reactform/precache-manifest.9ac08370b4565d33f2b80fe5675caac8.js",
+    "service-worker.js": "/reactform/service-worker.js",
+    "static/css/main.a1c5849e.chunk.css.map": "/reactform/static/css/main.a1c5849e.chunk.css.map",
+    "static/media/5.png": "/reactform/static/media/5.8d6d36c6.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a0250ab4.js",
+    "static/js/2.37623dad.chunk.js",
+    "static/css/main.a1c5849e.chunk.css",
+    "static/js/main.47d5577c.chunk.js"
+  ]
+}
