@@ -5,7 +5,7 @@ import { ic_person } from 'react-icons-kit/md/ic_person';
 // import { ic_confirmation_number } from 'react-icons-kit/md/ic_confirmation_number';
 import { ic_delete } from 'react-icons-kit/md/ic_delete';
 import { ic_mode_edit } from 'react-icons-kit/md/ic_mode_edit';
-
+import 'App.css';
 
 function App() {
   // const [Products, setProducts] = useState([
