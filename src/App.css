@@ -1,0 +1,184 @@
+/* form starting from here */
+.bg-image {
+  /* The image used */
+  background-color: peru;
+
+  /* Add the blur effect */
+  /* filter: blur(2px) brightness(80%);
+  -webkit-filter: blur(2px) brightness(80%); */
+
+  /* Full height */
+  width: 100%;
+  /* Center and scale the image nicely */
+  /* background-position: center; */
+  /* background-repeat: repeat; */
+  /* background-size: cover; */
+  position: absolute;
+  z-index: -1;
+}
+.textdec {
+  color: #ffffff;
+  background: #ffffff;
+  text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5,
+    -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5,
+    -2px 0px 0 #4074b5, 0px -2px 0 #4074b5;
+  color: #ffffff;
+  background: #ffffff;
+}
+form {
+  width: 25%;
+  margin: 0px auto;
+  padding: 8px 2px;
+  border-bottom: 5px solid orange;
+  border-top: 5px solid orange;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 15px 20px 21px -11px rgba(0, 0, 0, 0.69);
+  background-color: rgb(255, 255, 255);
+  transform: translate(0px, 4px);
+}
+.o {
+  color: orange;
+  padding: 0;
+  margin: 0;
+}
+.t-b {
+  text-align: center;
+}
+/* u {
+  border-bottom: 1.2px solid orange;
+} */
+input {
+  margin: 10px 0;
+}
+
+input[type='text'] {
+  width: 55%;
+  border: none;
+  /* border-radius: 20px; */
+  border-bottom: 2px solid rgba(245, 164, 13, 0.897);
+  padding: 8px;
+  transition: all 0.3s ease-in-out;
+  background: transparent;
+  font-size: 1.1rem;
+}
+input[type='text']:focus {
+  outline: 0;
+  width: 65%;
+}
+input[type='radio'] {
+  padding: 5px;
+  border: none;
+  background-color: orange;
+}
+/* ::placeholder {
+  color: #4074b5;
+  opacity: 0.8;
+} */
+.checkbox {
+  margin: 0 10px;
+  font: caption;
+}
+
+select {
+  margin: 8px 8px;
+  padding: 4px;
+  border: 2px solid orange;
+  border-radius: 20px;
+  background: transparent;
+  font-size: 1.1rem;
+}
+select:focus {
+  outline: 0;
+  background-color: rgb(163, 159, 159);
+}
+button {
+  background: orange;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+button {
+  background: orange;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  box-shadow: inset -1px 3px 8px 5px rgb(228, 151, 9),
+    2px 5px 16px 0px rgba(37, 36, 36, 0.596), 5px -9px 0px 5px rgba(0, 0, 0, 0);
+}
+button:focus {
+  outline: 0;
+}
+button:hover {
+  -webkit-box-shadow: 5px 5px 15px 5px #ff8080, -9px 5px 15px 5px #ffe488,
+    -7px -5px 15px 5px #8cff85, 12px -5px 15px 5px #80c7ff,
+    12px 10px 15px 7px #e488ff, -10px 10px 15px 7px #ff616b,
+    -10px -7px 27px 1px #8e5cff, 5px 5px 0px 5px rgba(255, 174, 0, 0);
+  box-shadow: 5px 5px 15px 5px #ff8080, -9px 5px 15px 5px #ffe488,
+    -7px -5px 15px 5px #8cff85, 12px -5px 15px 5px #80c7ff,
+    12px 10px 15px 7px #e488ff, -10px 10px 15px 7px #ff616b,
+    -10px -7px 27px 1px #8e5cff, 5px 5px 0px 5px rgba(255, 174, 0, 0);
+}
+table {
+  display: block;
+  min-width: 30%;
+  width: 83%;
+  /* max-width: auto; */
+  margin: 50px auto 1px auto;
+  background-color: rgb(255, 255, 255);
+  overflow-x: auto;
+  overflow: auto;
+  max-height: 51vh;
+}
+
+table,
+th,
+td {
+  border: 2.5px solid rgb(255, 171, 16);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th,
+td {
+  padding: 0px 6px;
+}
+th {
+  padding: 10px 34px;
+  background-color: rgb(197, 197, 197);
+}
+.iconCenter {
+  text-align: center;
+  color: orange;
+}
+
+input[type='button'] {
+  background: orange;
+  border: none;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: inset -1px 3px 8px 5px rgb(228, 151, 9),
+    2px 5px 16px 0px rgba(37, 36, 36, 0.596), 5px -9px 0px 5px rgba(0, 0, 0, 0);
+}
+input[type='button']:focus {
+  outline: 0;
+  padding: 10px 27px;
+}
+input[type='button']:hover {
+  padding: 10px 30px;
+}
+textarea {
+  border: 2px solid orange;
+  border-radius: 20px;
+  padding: 0.7rem;
+}
+textarea:focus {
+  outline: none;
+}
