@@ -5,7 +5,7 @@ import './header.css';
 export default function Header() {
   return (
     <ul className="heading">
-      <Link to="/" style={{ textDecoration: 'none' }}>
+      <Link to="/form/adduser" style={{ textDecoration: 'none' }}>
         <li>Add New User</li>
       </Link>
       <Link to="/table" style={{ textDecoration: 'none' }}>

@@ -4,147 +4,59 @@ import './App.css';
 import Form from './Form';
 import Table from './Table';
 import Header from './Header';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import ScrollToTop from 'react-router-scroll-top';
+import Login from './Login';
 
 function App() {
-  const WHATSAPP = 'Whatsapp';
-  const FACEBOOK = 'FaceBook';
-  const INSTAGRAM = 'Instagram';
-  
-  const [firstname, setfirstName] = useState('');
-  const handleId = event => setfirstName(event.target.value);
-
-  const [lastName, setlastName] = useState('');
-  const handleCustomersName = event => setlastName(event.target.value);
-
-  const [gender, setGen] = useState('');
-  const handleGender = event => setGen(event.target.value);
-
-  const [city, setCity] = useState('Lahore');
-  const handleCity = event => setCity(event.target.value);
-
-  const [comments, setcomments] = useState('');
-  const handleComments = event => setcomments(event.target.value);
-
-  const [checkBox, setcheckBox] = useState({
-    [WHATSAPP]: false,
-    [FACEBOOK]: false,
-    [INSTAGRAM]: false
-  });
-  const handleCheckBox = event => {
-    let id = event.target.id;
-    let checked = event.target.checked;
-    let dup = { ...checkBox, [id]: checked };
-    setcheckBox(dup);
-  };
-
-  const [recordNum, setrecordNum] = useState();
-
-  const initVal = () => {
-    const LC = localStorage.getItem('customers');
+  const initValue = () => {
+    const LC = localStorage.getItem('users');
     return LC ? JSON.parse(LC) : [];
   };
 
-  const [customers, setcustomers] = useState(initVal);
-  
-  useEffect(
-    () => localStorage.setItem('customers', JSON.stringify(customers)),
-    [customers]
-  );
-  //to redirect back to form.
-  const [isNull, setisNull] = useState(false);
+  const [users, setusers] = useState(initValue);
 
-  const handleSubmit = () => {
-    if (firstname === '' || lastName === '' || gender === '') {
-      setisNull(true);
-      setTimeout(() => {
-        setisNull(false);
-      }, 1000);
-      alert('Enter data to submit');
-    } else {
-      let newarr = [...customers];
+  useEffect(() => localStorage.setItem('users', JSON.stringify(users)), [
+    users
+  ]);
 
-      let length = customers.length - 1;
-      let newRecordNum = customers.length < 1 ? 0 : customers[length].recordNum;
+  const addUser = user => {
+    //generation a unique record num for every user!
+    let length = users.length - 1;
+    let newRecordNum = users.length < 1 ? 0 + 1 : users[length].recordNum + 1;
 
-      let newbobj = {
-        recordNum: newRecordNum + 1,
-        firstname,
-        lastName,
-        gender,
-        city,
-        comments,
-        checkBox
-      };
+    let newbobj = { ...user, recordNum: newRecordNum };
 
-      newarr.push(newbobj);
+    let newarr = [...users, newbobj];
 
-      setisNull(false);
+    setusers(newarr);
 
-      setcustomers(newarr);
-      setfirstName('');
-      setlastName('');
-      setGen('');
-      setCity('lahore');
-      setrecordNum();
-      setcomments('');
-      setcheckBox({
-        WHATSAPP: false,
-        FACEBOOK: false,
-        INSTAGRAM: false
-      });
-      console.log(newarr);
-    }
+    console.log(newarr);
   };
 
-  const deleteRecord = item => {
-    let newarr = customers.filter(customer => customer !== item);
-    setcustomers(newarr);
+  const removeUser = user => {
+    let newarr = users.filter(u => u !== user);
+    setusers(newarr);
     // setrecordNum(0);
   };
 
-  const updateForm = item => {
-    setfirstName(item.firstname);
-    setlastName(item.lastName);
-    setGen(item.gender);
-    setCity(item.city);
-    setcomments(item.comments);
-    setrecordNum(item.recordNum);
-    setcheckBox(item.checkBox);
-    setMode('Edit');
+  const updateUser = user => {
+    let newarr = [...users];
+
+    const index = newarr.findIndex(u => u.recordNum === user.recordNum);
+
+    newarr[index] = user;
+
+    setusers(newarr);
+
+    setMode('Submit');
   };
 
-  const handleUpdateObj = () => {
-    if (firstname === '' || lastName === '' || gender === '') {
-      alert('First Select Record  from the database to Update');
-    } else {
-      let newarr = [...customers];
+  const [userToUpdate, setuserToUpdate] = useState();
 
-      const index = newarr.findIndex(c => c.recordNum === recordNum);
-
-      newarr[index].firstname = firstname;
-      newarr[index].lastName = lastName;
-      newarr[index].gender = gender;
-      newarr[index].city = city;
-      newarr[index].comments = comments;
-      newarr[index].checkBox = checkBox;
-
-      setcustomers(newarr);
-
-      setfirstName('');
-      setlastName('');
-      setGen('');
-      setCity('lahore');
-      setrecordNum();
-      setcomments('');
-      setcheckBox({
-        WHATSAPP: false,
-        FACEBOOK: false,
-        INSTAGRAM: false
-      });
-      setMode('Submit');
-    }
+  const updateUserData = user => {
+    setuserToUpdate(user);
+    setMode('Edit');
   };
 
   //Conditional Rendering
@@ -158,38 +70,29 @@ function App() {
         <Switch>
           <Route path="/table">
             <ScrollToTop>
-              {isNull ? (
-                <Redirect exact to="/" />
-              ) : (
-                <Table
-                  customers={customers}
-                  updateForm={updateForm}
-                  deleteRecord={deleteRecord}
-                />
-              )}
+              <Table
+                users={users}
+                updateUserData={updateUserData}
+                removeUser={removeUser}
+              />
+            </ScrollToTop>
+          </Route>
+          <Route path="/form/edituser/:id">
+            <ScrollToTop>
+              <Form
+                updateUser={updateUser}
+                userToUpdate={userToUpdate}
+                Mode={Mode}
+              />
+            </ScrollToTop>
+          </Route>
+          <Route path="/form/adduser">
+            <ScrollToTop>
+              <Form addUser={addUser} Mode={Mode} />
             </ScrollToTop>
           </Route>
           <Route path="/">
-            <ScrollToTop>
-              <Form
-                firstname={firstname}
-                handleId={handleId}
-                lastName={lastName}
-                handleCustomersName={handleCustomersName}
-                gender={gender}
-                handleGender={handleGender}
-                checkBox={checkBox}
-                handleCheckBox={handleCheckBox}
-                city={city}
-                handleCity={handleCity}
-                comments={comments}
-                handleComments={handleComments}
-                handleSubmit={handleSubmit}
-                handleUpdateObj={handleUpdateObj}
-                Mode={Mode}
-                isNull={isNull}
-              />
-            </ScrollToTop>
+            <Login />
           </Route>
         </Switch>
       </div>

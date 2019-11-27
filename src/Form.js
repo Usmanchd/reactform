@@ -1,20 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon } from 'react-icons-kit';
 import { ic_person } from 'react-icons-kit/md/ic_person';
 import { Link } from 'react-router-dom';
 
 export default function Form(props) {
-  const WHATSAPP = 'Whatsapp';
-  const FACEBOOK = 'FaceBook';
-  const INSTAGRAM = 'Instagram';
+  const [user, setuser] = useState({
+    firstname: '',
+    lastName: '',
+    gender: '',
+    city: '',
+    comments: '',
+    checkbox: {
+      WHATSAPP: false,
+      FACEBOOK: false,
+      INSTAGRAM: false
+    }
+  });
+
+  const handleChange = e => {
+    let newcheckbox = e.target.type === 'checkbox' && {
+      ...user.checkbox,
+      [e.target.name]: e.target.checked
+    };
+    let newuser =
+      e.target.type === 'checkbox'
+        ? { ...user, checkbox: { ...newcheckbox } }
+        : { ...user, [e.target.name]: e.target.value };
+    setuser(newuser);
+    console.log(user);
+  };
+
+  useEffect(() => {
+    resetForm();
+    props.userToUpdate && setuser(props.userToUpdate);
+  }, [props.userToUpdate]);
+
+  const validateUser = e => {
+    if (user.firstname === '' || user.lastName === '' || user.gender === '') {
+      alert('Enter data to submit');
+    } else {
+      e.target.value === 'Submit'
+        ? props.addUser(user)
+        : props.updateUser(user);
+      resetForm();
+    }
+  };
+
+  const resetForm = () => {
+    setuser({
+      firstname: '',
+      lastName: '',
+      gender: '',
+      city: '',
+      comments: '',
+      checkbox: {
+        WHATSAPP: false,
+        FACEBOOK: false,
+        INSTAGRAM: false
+      }
+    });
+  };
+
   const Buttons = () =>
     props.Mode === 'Submit' ? (
-      <Link to="/table">
-        <input type="button" onClick={props.handleSubmit} value="Submit" />
-      </Link>
+      <input type="button" onClick={validateUser} value="Submit" />
     ) : (
-      <Link to="/table">
-        <input type="button" onClick={props.handleUpdateObj} value="Update" />
+      <Link to="/form/adduser">
+        <input type="button" onClick={validateUser} value="Update" />
       </Link>
     );
   return (
@@ -29,8 +81,9 @@ export default function Form(props) {
       </label>
       <input
         type="text"
-        value={props.firstname}
-        onChange={props.handleId}
+        name="firstname"
+        value={user.firstname}
+        onChange={handleChange}
         placeholder="FirstName"
       />
       <br />
@@ -39,8 +92,9 @@ export default function Form(props) {
       </label>
       <input
         type="text"
-        value={props.lastName}
-        onChange={props.handleCustomersName}
+        name="lastName"
+        value={user.lastName}
+        onChange={handleChange}
         placeholder="Last Name"
       />
       <br />
@@ -57,53 +111,53 @@ export default function Form(props) {
           type="radio"
           name="gender"
           value="Male"
-          onChange={props.handleGender}
-          checked={props.gender === 'Male'}
+          onChange={handleChange}
+          checked={user.gender === 'Male'}
         />
         Male
         <input
           type="radio"
           name="gender"
           value="Female"
-          checked={props.gender === 'Female'}
-          onChange={props.handleGender}
+          checked={user.gender === 'Female'}
+          onChange={handleChange}
         />
         Female
         <br />
         <u>Contact Method</u> <br />
         <label className="checkbox">
           <input
-            id={WHATSAPP}
+            name="WHATSAPP"
             type="checkbox"
-            checked={props.checkBox[WHATSAPP]}
-            onChange={props.handleCheckBox}
+            checked={user.checkbox.WHATSAPP}
+            onChange={handleChange}
           />
-          {WHATSAPP}
+          Whatsapp
         </label>
         <label className="checkbox">
           <span className="check"></span>
           <input
-            id={FACEBOOK}
+            name="FACEBOOK"
             type="checkbox"
-            checked={props.checkBox[FACEBOOK]}
-            onChange={props.handleCheckBox}
+            checked={user.checkbox.FACEBOOK}
+            onChange={handleChange}
           />
-          {FACEBOOK}
+          Facebook
         </label>
         <label className="checkbox">
           <input
-            id={INSTAGRAM}
+            name="INSTAGRAM"
             type="checkbox"
-            checked={props.checkBox[INSTAGRAM]}
-            onChange={props.handleCheckBox}
+            checked={user.checkbox.INSTAGRAM}
+            onChange={handleChange}
           />
-          {INSTAGRAM}
+          Instagram
         </label>
       </div>
       <br />
       <label>
         City
-        <select value={props.city} onChange={props.handleCity}>
+        <select name="city" value={user.city} onChange={handleChange}>
           <option value="" disabled>
             Select The City
           </option>
@@ -364,8 +418,9 @@ export default function Form(props) {
         cols="30"
         name="Comments"
         type="text"
-        value={props.comments}
-        onChange={props.handleComments}
+        name="comments"
+        value={user.comments}
+        onChange={handleChange}
       ></textarea>
       <br />
       <Buttons />

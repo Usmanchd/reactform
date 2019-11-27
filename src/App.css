@@ -67,6 +67,7 @@ input[type='text']:focus {
   width: 65%;
 }
 input[type='radio'] {
+  margin: 1px 3px;
   padding: 5px;
   border: none;
   background-color: orange;
@@ -76,7 +77,7 @@ input[type='radio'] {
   opacity: 0.8;
 } */
 .checkbox {
-  margin: 0 10px;
+  margin: 1px 10px;
   font: caption;
 }
 
@@ -92,7 +93,7 @@ select:focus {
   outline: 0;
   background-color: rgb(163, 159, 159);
 }
-button {
+/* button {
   background: orange;
   border: none;
   border-radius: 20px;
@@ -122,7 +123,7 @@ button:hover {
     -7px -5px 15px 5px #8cff85, 12px -5px 15px 5px #80c7ff,
     12px 10px 15px 7px #e488ff, -10px 10px 15px 7px #ff616b,
     -10px -7px 27px 1px #8e5cff, 5px 5px 0px 5px rgba(255, 174, 0, 0);
-}
+} */
 table {
   display: block;
   min-width: 30%;

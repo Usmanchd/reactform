@@ -5,15 +5,6 @@ import { ic_mode_edit } from 'react-icons-kit/md/ic_mode_edit';
 import { Link } from 'react-router-dom';
 
 export default function Table(props) {
-  const WHATSAPP = 'Whatsapp';
-  const FACEBOOK = 'FaceBook';
-  const INSTAGRAM = 'Instagram';
-  const styleGrey = {
-    backgroundColor: 'grey'
-  };
-  const styleblue = {
-    backgroundColor: 'blue'
-  };
   return (
     <table>
       <h1 className="t-b textdec">
@@ -32,21 +23,20 @@ export default function Table(props) {
           <th>Update</th>
         </tr>
       </thead>
-      {props.customers.map((c, i) => {
+      {props.users.map((c, i) => {
+        console.log(props.users);
         return (
           <tbody key={i}>
             <tr>
               <td>{c.recordNum}</td>
               <td>{c.firstname}</td>
               <td>{c.lastName}</td>
-              <td style={c.gender === 'Male' ? styleGrey : styleblue}>
-                {c.gender}
-              </td>
+              <td>{c.gender}</td>
               <td>{c.city}</td>
               <td>
-                <p>{c.checkBox[WHATSAPP] && WHATSAPP}</p>
-                <p>{c.checkBox[FACEBOOK] && FACEBOOK}</p>
-                <p>{c.checkBox[INSTAGRAM] && INSTAGRAM}</p>
+                <p>{c.checkbox.WHATSAPP && 'WHATSAPP'}</p>
+                <p>{c.checkbox.FACEBOOK && 'FACEBOOK'}</p>
+                <p>{c.checkbox.INSTAGRAM && 'INSTAGRAM'}</p>
               </td>
               <td>{c.comments}</td>
               <td className="iconCenter">
@@ -55,17 +45,17 @@ export default function Table(props) {
                 <Icon
                   icon={ic_delete}
                   size={32}
-                  onClick={() => props.deleteRecord(c)}
+                  onClick={() => props.removeUser(c)}
                 />
               </td>
               <td className="iconCenter">
                 {/* <button onClick={() => updateForm(c)}>Update</button> */}
-                <Link to="/">
+                <Link to={`/form/edituser/${c.recordNum}`}>
                   <Icon
                     style={{ color: 'orange' }}
                     icon={ic_mode_edit}
                     size={32}
-                    onClick={() => props.updateForm(c)}
+                    onClick={() => props.updateUserData(c)}
                   />
                 </Link>
               </td>
