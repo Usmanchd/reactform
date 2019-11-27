@@ -128,11 +128,11 @@ table {
   min-width: 30%;
   width: 83%;
   /* max-width: auto; */
-  margin: 50px auto 1px auto;
+  margin: auto;
   background-color: rgb(255, 255, 255);
-  overflow-x: auto;
+  /* overflow-x: auto;
   overflow: auto;
-  max-height: 51vh;
+  max-height: 51vh; */
 }
 
 table,
